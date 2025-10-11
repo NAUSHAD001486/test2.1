@@ -174,7 +174,7 @@ body {
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border: 2px solid #7C3AED; /* Temporary visible border for debugging */
+    border: 1px solid #e5e7eb;
     min-width: 220px;
     z-index: 1000;
     opacity: 0;
@@ -187,13 +187,6 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
-}
-
-/* Temporary: Always show dropdown for debugging */
-.file-source-dropdown {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateX(-50%) translateY(0) !important;
 }
 
 .dropdown-item {
