@@ -53,14 +53,14 @@ function initializeEventListeners() {
     uploadBox.addEventListener('dragleave', handleDragLeave);
     uploadBox.addEventListener('drop', handleDrop);
     
-// File source dropdown
-fileSourceDropdown.addEventListener('click', handleFileSourceSelect);
+    // File source dropdown
+    fileSourceDropdown.addEventListener('click', handleFileSourceSelect);
 
-// Show dropdown when clicking the select files button
-selectFilesBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    toggleFileSourceDropdown();
-});
+    // Show dropdown when clicking the select files button
+    selectFilesBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleFileSourceDropdown();
+    });
     
     // Convert button
     convertBtn.addEventListener('click', handleConvert);
