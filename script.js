@@ -46,7 +46,6 @@ function initializeEventListeners() {
     window.addEventListener('scroll', handleScroll);
     
     // File selection
-    selectFilesBtn.addEventListener('click', toggleFileSourceDropdown);
     fileInput.addEventListener('change', handleFileSelect);
     
     // Drag and drop
@@ -54,8 +53,14 @@ function initializeEventListeners() {
     uploadBox.addEventListener('dragleave', handleDragLeave);
     uploadBox.addEventListener('drop', handleDrop);
     
-    // File source dropdown
-    fileSourceDropdown.addEventListener('click', handleFileSourceSelect);
+// File source dropdown
+fileSourceDropdown.addEventListener('click', handleFileSourceSelect);
+
+// Show dropdown when clicking the select files button
+selectFilesBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleFileSourceDropdown();
+});
     
     // Convert button
     convertBtn.addEventListener('click', handleConvert);
@@ -110,8 +115,18 @@ function handleScroll() {
 
 // File source dropdown toggle
 function toggleFileSourceDropdown() {
-    fileSourceDropdown.classList.toggle('show');
-    selectFilesBtn.classList.toggle('active');
+    const isShowing = fileSourceDropdown.classList.contains('show');
+    
+    // Close all other dropdowns first
+    formatOptions.classList.remove('show');
+    
+    if (isShowing) {
+        fileSourceDropdown.classList.remove('show');
+        selectFilesBtn.classList.remove('active');
+    } else {
+        fileSourceDropdown.classList.add('show');
+        selectFilesBtn.classList.add('active');
+    }
 }
 
 // Format dropdown toggle

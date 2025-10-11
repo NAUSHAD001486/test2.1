@@ -166,19 +166,20 @@ body {
 /* File Source Dropdown */
 .file-source-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     border: 1px solid #e5e7eb;
-    min-width: 200px;
-    z-index: 100;
+    min-width: 220px;
+    z-index: 1000;
     opacity: 0;
     visibility: hidden;
     transform: translateX(-50%) translateY(-10px);
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .file-source-dropdown.show {
@@ -188,13 +189,16 @@ body {
 }
 
 .dropdown-item {
-    padding: 12px 20px;
+    padding: 15px 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     transition: background 0.2s ease;
     border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
 }
 
 .dropdown-item:last-child {
@@ -203,6 +207,7 @@ body {
 
 .dropdown-item:hover {
     background: #f8f5ff;
+    color: #7C3AED;
 }
 
 .dropdown-item .icon {
