@@ -69,6 +69,9 @@ function initializeEventListeners() {
     // Show dropdown when clicking the select files button
     selectFilesBtn.addEventListener('click', function(e) {
         e.stopPropagation();
+        console.log('Select files button clicked!');
+        console.log('Button element:', selectFilesBtn);
+        console.log('Dropdown element:', fileSourceDropdown);
         toggleFileSourceDropdown();
     });
     
@@ -129,11 +132,17 @@ function handleScroll() {
 
 // File source dropdown toggle
 function toggleFileSourceDropdown() {
+    console.log('toggleFileSourceDropdown called');
+    
     if (!fileSourceDropdown) {
+        console.error('fileSourceDropdown not found');
         return;
     }
     
+    console.log('Current classes:', fileSourceDropdown.className);
+    
     const isShowing = fileSourceDropdown.classList.contains('show');
+    console.log('Is showing:', isShowing);
     
     // Close all other dropdowns first
     if (formatOptions) {
@@ -143,10 +152,14 @@ function toggleFileSourceDropdown() {
     if (isShowing) {
         fileSourceDropdown.classList.remove('show');
         selectFilesBtn.classList.remove('active');
+        console.log('Dropdown hidden');
     } else {
         fileSourceDropdown.classList.add('show');
         selectFilesBtn.classList.add('active');
+        console.log('Dropdown shown');
     }
+    
+    console.log('New classes:', fileSourceDropdown.className);
 }
 
 // Format dropdown toggle

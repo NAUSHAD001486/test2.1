@@ -168,9 +168,10 @@ body {
 /* File Source Dropdown */
 .file-source-dropdown {
     position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px);
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 10px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -179,6 +180,7 @@ body {
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-10px);
     transition: all 0.3s ease;
     overflow: hidden;
 }
@@ -186,7 +188,15 @@ body {
 .file-source-dropdown.show {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
+}
+
+/* Temporary: Always show dropdown for testing */
+.file-source-dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    border: 2px solid red !important;
 }
 
 .dropdown-item {
