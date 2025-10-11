@@ -4,41 +4,51 @@ let isConverting = false;
 let lastScrollY = 0;
 let scrollTimeout;
 
-// DOM elements
-const header = document.getElementById('header');
-const uploadBox = document.getElementById('uploadBox');
-const selectFilesBtn = document.getElementById('selectFilesBtn');
-const fileSourceDropdown = document.getElementById('fileSourceDropdown');
-const fileListContainer = document.getElementById('fileListContainer');
-const outputSettings = document.getElementById('outputSettings');
-const convertBtn = document.getElementById('convertBtn');
-const progressContainer = document.getElementById('progressContainer');
-const progressFill = document.getElementById('progressFill');
-const progressText = document.getElementById('progressText');
-const loadingSpinner = document.getElementById('loadingSpinner');
-const urlModal = document.getElementById('urlModal');
-const urlInput = document.getElementById('urlInput');
-const addUrlBtn = document.getElementById('addUrlBtn');
-const closeUrlModal = document.getElementById('closeUrlModal');
-const settingsModal = document.getElementById('settingsModal');
-const closeSettingsModal = document.getElementById('closeSettingsModal');
-const formatBtn = document.getElementById('formatBtn');
-const formatOptions = document.getElementById('formatOptions');
-const selectedFormat = document.getElementById('selectedFormat');
-
-// File input (hidden)
-const fileInput = document.createElement('input');
-fileInput.type = 'file';
-fileInput.multiple = true;
-fileInput.accept = 'image/*';
-fileInput.style.display = 'none';
-document.body.appendChild(fileInput);
+// DOM elements (will be initialized after DOM loads)
+let header, uploadBox, selectFilesBtn, fileSourceDropdown, fileListContainer;
+let outputSettings, convertBtn, progressContainer, progressFill, progressText;
+let loadingSpinner, urlModal, urlInput, addUrlBtn, closeUrlModal;
+let settingsModal, closeSettingsModal, formatBtn, formatOptions, selectedFormat;
+let fileInput;
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
+    initializeDOMElements();
     initializeEventListeners();
     registerServiceWorker();
 });
+
+// Initialize DOM elements
+function initializeDOMElements() {
+    header = document.getElementById('header');
+    uploadBox = document.getElementById('uploadBox');
+    selectFilesBtn = document.getElementById('selectFilesBtn');
+    fileSourceDropdown = document.getElementById('fileSourceDropdown');
+    fileListContainer = document.getElementById('fileListContainer');
+    outputSettings = document.getElementById('outputSettings');
+    convertBtn = document.getElementById('convertBtn');
+    progressContainer = document.getElementById('progressContainer');
+    progressFill = document.getElementById('progressFill');
+    progressText = document.getElementById('progressText');
+    loadingSpinner = document.getElementById('loadingSpinner');
+    urlModal = document.getElementById('urlModal');
+    urlInput = document.getElementById('urlInput');
+    addUrlBtn = document.getElementById('addUrlBtn');
+    closeUrlModal = document.getElementById('closeUrlModal');
+    settingsModal = document.getElementById('settingsModal');
+    closeSettingsModal = document.getElementById('closeSettingsModal');
+    formatBtn = document.getElementById('formatBtn');
+    formatOptions = document.getElementById('formatOptions');
+    selectedFormat = document.getElementById('selectedFormat');
+
+    // File input (hidden)
+    fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.multiple = true;
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+}
 
 // Event Listeners
 function initializeEventListeners() {
@@ -59,6 +69,8 @@ function initializeEventListeners() {
     // Show dropdown when clicking the select files button
     selectFilesBtn.addEventListener('click', function(e) {
         e.stopPropagation();
+        console.log('Select files button clicked!');
+        console.log('File source dropdown element:', fileSourceDropdown);
         toggleFileSourceDropdown();
     });
     
@@ -81,12 +93,16 @@ function initializeEventListeners() {
     
     // Close dropdowns when clicking outside
     document.addEventListener('click', function(e) {
-        if (!fileSourceDropdown.contains(e.target) && !selectFilesBtn.contains(e.target)) {
-            fileSourceDropdown.classList.remove('show');
-            selectFilesBtn.classList.remove('active');
+        if (!e.target.closest('.file-source-dropdown') && !e.target.closest('.select-files-btn')) {
+            if (fileSourceDropdown) {
+                fileSourceDropdown.classList.remove('show');
+                selectFilesBtn.classList.remove('active');
+            }
         }
-        if (!formatOptions.contains(e.target) && !formatBtn.contains(e.target)) {
-            formatOptions.classList.remove('show');
+        if (!e.target.closest('.format-options') && !e.target.closest('.format-btn')) {
+            if (formatOptions) {
+                formatOptions.classList.remove('show');
+            }
         }
     });
     
@@ -115,17 +131,30 @@ function handleScroll() {
 
 // File source dropdown toggle
 function toggleFileSourceDropdown() {
+    console.log('toggleFileSourceDropdown called');
+    console.log('fileSourceDropdown:', fileSourceDropdown);
+    
+    if (!fileSourceDropdown) {
+        console.error('fileSourceDropdown element not found!');
+        return;
+    }
+    
     const isShowing = fileSourceDropdown.classList.contains('show');
+    console.log('isShowing:', isShowing);
     
     // Close all other dropdowns first
-    formatOptions.classList.remove('show');
+    if (formatOptions) {
+        formatOptions.classList.remove('show');
+    }
     
     if (isShowing) {
         fileSourceDropdown.classList.remove('show');
         selectFilesBtn.classList.remove('active');
+        console.log('Dropdown hidden');
     } else {
         fileSourceDropdown.classList.add('show');
         selectFilesBtn.classList.add('active');
+        console.log('Dropdown shown');
     }
 }
 
