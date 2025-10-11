@@ -138,6 +138,7 @@ body {
     position: relative;
     overflow: visible;
     z-index: 100;
+    margin-bottom: 0;
 }
 
 .select-files-btn:hover {
@@ -167,18 +168,17 @@ body {
 /* File Source Dropdown */
 .file-source-dropdown {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 10px);
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-10px);
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e5e7eb;
+    border: 2px solid #7C3AED; /* Temporary visible border for debugging */
     min-width: 220px;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-50%) translateY(-10px);
     transition: all 0.3s ease;
     overflow: hidden;
 }
@@ -187,6 +187,13 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
+}
+
+/* Temporary: Always show dropdown for debugging */
+.file-source-dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
 }
 
 .dropdown-item {
