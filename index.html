@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebP to PNG Converter - Love U Convert</title>
+    <meta name="description" content="Convert WebP to PNG files instantly with our free, fast, and secure online converter. Support for multiple formats including PNG, JPEG, GIF, and more.">
+    <meta name="keywords" content="webp to png, image converter, file converter, webp converter, png converter, free converter">
+    <meta name="author" content="Love U Convert">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://loveuconvert.com/">
+    <meta property="og:title" content="WebP to PNG Converter - Love U Convert">
+    <meta property="og:description" content="Convert WebP to PNG files instantly with our free, fast, and secure online converter.">
+    <meta property="og:image" content="https://loveuconvert.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://loveuconvert.com/">
+    <meta property="twitter:title" content="WebP to PNG Converter - Love U Convert">
+    <meta property="twitter:description" content="Convert WebP to PNG files instantly with our free, fast, and secure online converter.">
+    <meta property="twitter:image" content="https://loveuconvert.com/og-image.jpg">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#7C3AED">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Love U Convert">
+    <meta name="msapplication-TileColor" content="#7C3AED">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="logo">Love U convert</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="main-title">WebP to PNG</h1>
+            <p class="subtitle">The best and most advanced way to convert WebP to PNG for free.</p>
+            
+            <!-- Upload Area -->
+            <div class="upload-container">
+                <div class="upload-box" id="uploadBox">
+                    <button class="select-files-btn" id="selectFilesBtn">
+                        Select files
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <p class="drag-text">Or drag and drop files here</p>
+                    
+                    <!-- File Source Dropdown -->
+                    <div class="file-source-dropdown" id="fileSourceDropdown">
+                        <div class="dropdown-item" data-source="device">
+                            <span class="icon">📁</span>
+                            From Device
+                        </div>
+                        <div class="dropdown-item" data-source="googledrive">
+                            <span class="icon">☁️</span>
+                            Google Drive
+                        </div>
+                        <div class="dropdown-item" data-source="onedrive">
+                            <span class="icon">☁️</span>
+                            OneDrive
+                        </div>
+                        <div class="dropdown-item" data-source="url">
+                            <span class="icon">🔗</span>
+                            From URL
+                        </div>
+                        <div class="dropdown-item" data-source="dropbox">
+                            <span class="icon">📦</span>
+                            Dropbox
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File List Container -->
+                <div class="file-list-container" id="fileListContainer">
+                    <!-- Files will be dynamically added here -->
+                </div>
+
+                <!-- Output Settings -->
+                <div class="output-settings" id="outputSettings">
+                    <label class="output-label">Output:</label>
+                    <div class="format-dropdown">
+                        <button class="format-btn" id="formatBtn">
+                            <span id="selectedFormat">PNG</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="format-options" id="formatOptions">
+                            <div class="format-option" data-format="png">PNG</div>
+                            <div class="format-option" data-format="bmp">BMP</div>
+                            <div class="format-option" data-format="eps">EPS</div>
+                            <div class="format-option" data-format="gif">GIF</div>
+                            <div class="format-option" data-format="ico">ICO</div>
+                            <div class="format-option" data-format="jpeg">JPEG</div>
+                            <div class="format-option" data-format="jpg">JPG</div>
+                            <div class="format-option" data-format="odd">ODD</div>
+                            <div class="format-option" data-format="svg">SVG</div>
+                            <div class="format-option" data-format="psd">PSD</div>
+                            <div class="format-option" data-format="tga">TGA</div>
+                            <div class="format-option" data-format="tiff">TIFF</div>
+                            <div class="format-option" data-format="webp">WebP</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convert/Download Button -->
+                <button class="convert-btn" id="convertBtn" disabled>
+                    <span class="btn-text">Convert</span>
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                </button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">0%</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- URL Input Modal -->
+    <div class="modal" id="urlModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Enter Image URL</h3>
+                <button class="close-btn" id="closeUrlModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="url" id="urlInput" placeholder="https://example.com/image.webp">
+                <button class="add-url-btn" id="addUrlBtn">Add Image</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Advanced Settings</h3>
+                <button class="close-btn" id="closeSettingsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label for="quality">Quality:</label>
+                    <input type="range" id="quality" min="1" max="100" value="90">
+                    <span id="qualityValue">90%</span>
+                </div>
+                <div class="setting-group">
+                    <label for="width">Width (px):</label>
+                    <input type="number" id="width" placeholder="Auto">
+                </div>
+                <div class="setting-group">
+                    <label for="height">Height (px):</label>
+                    <input type="number" id="height" placeholder="Auto">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

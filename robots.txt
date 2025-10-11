@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://loveuconvert.com/sitemap.xml
+
+# Disallow API endpoints from crawling
+Disallow: /api/
+
+# Allow static assets
+Allow: /styles.css
+Allow: /script.js
+Allow: /manifest.json
+Allow: /sw.js
+Allow: /*.png
+Allow: /*.ico
+Allow: /*.xml

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .icon { width: 192px; height: 192px; background: #7C3AED; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; margin: 10px; }
+        canvas { border: 1px solid #ccc; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>PWA Icon Generator</h1>
+    <p>This page generates the required PWA icons. Right-click and save each canvas as the corresponding icon file.</p>
+    
+    <div class="icon">192x192</div>
+    <canvas id="icon192" width="192" height="192"></canvas>
+    
+    <div class="icon">512x512</div>
+    <canvas id="icon512" width="512" height="512"></canvas>
+    
+    <div class="icon">180x180</div>
+    <canvas id="icon180" width="180" height="180"></canvas>
+    
+    <div class="icon">32x32</div>
+    <canvas id="icon32" width="32" height="32"></canvas>
+    
+    <div class="icon">16x16</div>
+    <canvas id="icon16" width="16" height="16"></canvas>
+
+    <script>
+        function createIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#7C3AED';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Rounded corners
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.1);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // Text
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.15}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('LUC', size/2, size/2);
+        }
+        
+        createIcon('icon192', 192);
+        createIcon('icon512', 512);
+        createIcon('icon180', 180);
+        createIcon('icon32', 32);
+        createIcon('icon16', 16);
+    </script>
+</body>
+</html>
